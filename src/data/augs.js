@@ -1,5 +1,6 @@
 import raw from './augs-20220428.json';
 import _ from 'lodash';
+import { writable } from 'svelte/store';
 
 export let augments = {
 	all: [],
@@ -43,3 +44,24 @@ raw.forEach((element, index) => {
 	}
 	augments.all.push(newAug);
 });
+
+export let augmentSearchResults = writable([...augments.all]);
+
+function convertRomanNumeral (string) {
+	return string.replace('1', 'I').replace('2', 'II').replace('3', 'III').replace('4', 'IV').replace('5', 'V');
+}
+
+export function augmentSearch(string) {
+	let searchStringRomanNumeral = convertRomanNumeral(string);
+	let searchStringLowerCase = searchStringRomanNumeral.toLowerCase();
+	let searchStringNoSpace = searchStringLowerCase.replaceAll(' ', '');
+	console.log('search:', searchStringNoSpace);
+	if (!string) {
+		augmentSearchResults.set(augments.all);
+	} else {
+		console.log(augments.all.filter(e => e.name.toLowerCase().replaceAll(' ', '').includes(searchStringNoSpace)))
+		augmentSearchResults.set(
+			augments.all.filter(e => e.name.toLowerCase().replaceAll(' ', '').includes(searchStringNoSpace))
+		);
+	}
+}
