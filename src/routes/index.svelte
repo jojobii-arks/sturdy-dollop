@@ -1,14 +1,15 @@
-<div class="h-screen grid justify-center items-center bg-rose-200">
+<script>
+  import Header from '../components/Header.svelte';
+	import { augments } from '../data/data';
 
-  <div class="bg-gray-50 rounded-full px-12 py-4 text-center shadow-md">
-    <h1 class="text-3xl font-bold">Svelte + TailwindCSS</h1>
-    <h2>just another template | <a href="https://github.com/joseph-bravo/svelte-tailwind">github</a></h2>
-  </div>
+	console.log(augments);
 
-</div>
+</script>
 
-<style>
-  a {
-    @apply text-red-900 hover:brightness-125;
-  }
-</style>
+<Header />
+
+<ul>
+	{#each augments.all as augment}
+	<li>{augment.name}</li>
+	{/each}
+</ul>

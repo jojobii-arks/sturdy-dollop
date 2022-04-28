@@ -4,9 +4,9 @@ import adapterStatic from '@sveltejs/adapter-static';
 
 //? Change when building site.
 //!=================================
-const buildingForGitHubPages = true;
+const buildingForGitHubPages = false;
 
-const repositoryName = 'svelte-tailwind';
+const repositoryName = 'proper-arks-sanctum';
 //!=================================
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -33,7 +33,7 @@ if (buildingForGitHubPages) {
   };
   config.kit.prerender = {
     default: true
-  }
+  };
 }
 
 export default config;
