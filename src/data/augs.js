@@ -1,19 +1,43 @@
 import raw from './augs-20220428.json';
 import _ from 'lodash';
+import { convertRomanNumeral } from '../util';
 import { writable } from 'svelte/store';
 
 export let augments = {
 	all: [],
-	getById: (id) => augments.all.find(e => e.id === id),
-	search: (string) => augments.all.filter(e => e.name.includes(string))
+	getById: (id) => augments.all.find((e) => e.id === id),
+	allSlots: (array) => {
+		if (!array) {
+			array = augments.all;
+		}
+		let preOut = {};
+
+		array.forEach((aug) => {
+			if (!preOut[aug.base]) {
+				preOut[aug.base] = [];
+			}
+			preOut[aug.base].push(aug);
+		});
+
+		let out = [];
+
+		for (let prop in preOut) {
+			out.push({
+				name: _.startCase(prop),
+				augments: preOut[prop],
+			});
+		}
+		return out;
+	},
 };
 
-const iconPath = 'src/assets/ngs-icons/effects/'
+const iconPath = 'src/assets/ngs-icons/effects/';
 
-raw.forEach((element, index) => {
-	let newAug = {}
+let nextAugId = 1;
+raw.forEach((element) => {
+	let newAug = {};
 	newAug.effects = [];
-	newAug.id = index + 1;
+	newAug.id = nextAugId++;
 
 	for (let prop in element) {
 		let value = element[prop];
@@ -27,7 +51,7 @@ raw.forEach((element, index) => {
 					if (prop.includes('[stat+]')) {
 						valueFormatted = (value > 0 ? '+' : '') + value;
 					} else if (prop.includes('[stat%]')) {
-						valueFormatted = (value > 0 ? '+' : '') + value * 1000 / 10 + '%';
+						valueFormatted = (value > 0 ? '+' : '') + (value * 1000) / 10 + '%';
 					}
 
 					let icon = _.kebabCase(prop.slice(7)) + '.svg';
@@ -36,7 +60,7 @@ raw.forEach((element, index) => {
 						name: prop.slice(7),
 						value: value,
 						valueFormatted: valueFormatted,
-						icon: iconPath + icon
+						icon: iconPath + icon,
 					});
 				}
 			}
@@ -45,21 +69,73 @@ raw.forEach((element, index) => {
 	augments.all.push(newAug);
 });
 
-export let augmentSearchResults = writable([...augments.all]);
-
-function convertRomanNumeral (string) {
-	return string.replace('1', 'I').replace('2', 'II').replace('3', 'III').replace('4', 'IV').replace('5', 'V');
-}
-
-export function augmentSearch(string) {
+function formatForSearch(string) {
 	let searchStringRomanNumeral = convertRomanNumeral(string);
 	let searchStringLowerCase = searchStringRomanNumeral.toLowerCase();
 	let searchStringNoSpace = searchStringLowerCase.replaceAll(' ', '');
-	if (!string) {
-		augmentSearchResults.set(augments.all);
-	} else {
-		augmentSearchResults.set(
-			augments.all.filter(e => e.name.toLowerCase().replaceAll(' ', '').includes(searchStringNoSpace))
-		);
-	}
+	return searchStringNoSpace;
+}
+
+export let augmentSlots = writable();
+initializeAugmentSlots();
+
+function initializeAugmentSlots() {
+	augmentSlots.update((preOut) => {
+		preOut = {};
+		let out = [];
+		augments.all.forEach((e) => {
+			if (!preOut[e.base]) {
+				preOut[e.base] = {
+					augments: [],
+				};
+			}
+			e.hidden = false;
+			e.collapsed = false;
+			preOut[e.base].augments.push(e);
+		});
+
+		for (let prop in preOut) {
+			out.push({
+				name: _.startCase(prop),
+				augments: preOut[prop].augments,
+				hidden: false,
+				collapsed: false,
+			});
+		}
+
+		console.log(out);
+		return out;
+	});
+}
+
+export function searchAugmentSlots(string) {
+	let searchQuery = formatForSearch(string);
+
+	augmentSlots.update((augmentSlots) => {
+		augmentSlots.forEach((slot) => {
+			let augments = slot.augments;
+			let isEmpty = true;
+			augments.forEach((augment) => {
+				if (formatForSearch(augment.name).includes(searchQuery)) {
+					augment.hidden = false;
+					isEmpty = false;
+				} else {
+					augment.hidden = true;
+				}
+			});
+			slot.hidden = isEmpty;
+		});
+		console.log(augmentSlots);
+		return augmentSlots;
+	});
+}
+
+export function expandAll(bool) {
+	augmentSlots.update((augmentSlots) => {
+		augmentSlots.forEach((slot) => {
+			slot.collapsed = bool;
+		});
+		console.log(augmentSlots);
+		return augmentSlots;
+	});
 }

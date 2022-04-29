@@ -10,7 +10,7 @@
 		hidden = !hidden
   }
 
-	let effects = augment.effects;
+	$: effects = augment.effects;
 
 </script>
 

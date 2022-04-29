@@ -6,7 +6,6 @@ export const user = writable({
 	change: {
 		addGearPiece: (type, name) => user.update(user => {
 		user.gear.push(new GearPiece(type, name));
-		console.log(user);
 		return user;
 	}),
 		addAugment: (gearId, augmentId) => user.update(user => {
