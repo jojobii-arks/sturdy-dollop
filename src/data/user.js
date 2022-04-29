@@ -1,17 +1,22 @@
 import { writable } from "svelte/store";
+import { augments } from "../data/augs"
 
 export const user = writable({
 	gear: [],
-	addGearPiece: (type, name) => user.update(user => {
+	change: {
+		addGearPiece: (type, name) => user.update(user => {
 		user.gear.push(new GearPiece(type, name));
 		console.log(user);
 		return user;
 	}),
+		addAugment: (gearId, augmentId) => user.update(user => {
+		let gear = user.gear.find(e => e.id === gearId);
+		gear.augments.push(augments.getById(augmentId))
+		return user;
+	})}
 });
 
 let nextGearId = 1;
-
-
 
 class GearPiece {
 	constructor(type, name) {
@@ -19,9 +24,9 @@ class GearPiece {
 		this.type = type;
 		this.name = name;
 		if (type === 'unit') {
-			this.icon = '../assets/ngs-icons/icon-unit.svg'
+			this.icon = 'src/assets/ngs-icons/icon-unit.svg'
 		} else if (type === 'weapon') {
-			this.icon = '../assets/ngs-icons/icon-weapon.svg'
+			this.icon = 'src/assets/ngs-icons/icon-weapon.svg'
 		}
 		this.augments = [];
 	}

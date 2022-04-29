@@ -4,11 +4,11 @@ import { writable } from 'svelte/store';
 
 export let augments = {
 	all: [],
-	getById:(id) => augments.all.find(e => e.id === id),
+	getById: (id) => augments.all.find(e => e.id === id),
 	search: (string) => augments.all.filter(e => e.name.includes(string))
 };
 
-const iconPath = '../assets/ngs-icons/effects/'
+const iconPath = 'src/assets/ngs-icons/effects/'
 
 raw.forEach((element, index) => {
 	let newAug = {}
@@ -55,11 +55,9 @@ export function augmentSearch(string) {
 	let searchStringRomanNumeral = convertRomanNumeral(string);
 	let searchStringLowerCase = searchStringRomanNumeral.toLowerCase();
 	let searchStringNoSpace = searchStringLowerCase.replaceAll(' ', '');
-	console.log('search:', searchStringNoSpace);
 	if (!string) {
 		augmentSearchResults.set(augments.all);
 	} else {
-		console.log(augments.all.filter(e => e.name.toLowerCase().replaceAll(' ', '').includes(searchStringNoSpace)))
 		augmentSearchResults.set(
 			augments.all.filter(e => e.name.toLowerCase().replaceAll(' ', '').includes(searchStringNoSpace))
 		);
