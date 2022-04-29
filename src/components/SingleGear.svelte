@@ -8,6 +8,10 @@
 			return element.id !== gear.id;
 		});
 	}
+
+	function removeAugment(gear, augment) {
+		$user.change.removeAugment(gear.id, augment.id);
+	}
 </script>
 
 <li class="flex w-64 flex-col gap-8 text-white">
@@ -17,8 +21,12 @@
 		<img src={gear.icon} alt="" />
 		<h2 class="">{gear.name}</h2>
 	</div>
-	<ul class="grid grid-flow-row gap-4">
+	<ul class="flex flex-col gap-2">
 		{#each gear.augments as augment}
+			<button
+				class="self-end rounded-full bg-white px-2 font-semibold text-red-500"
+				on:click={() => removeAugment(gear, augment)}>Remove</button
+			>
 			<SingleAugment {augment} />
 		{/each}
 	</ul>
