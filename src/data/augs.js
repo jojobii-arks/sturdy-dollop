@@ -100,6 +100,7 @@ function initializeAugmentSlots() {
 				augments: preOut[prop].augments,
 				hidden: false,
 				collapsed: false,
+				selected: false,
 			});
 		}
 
@@ -107,6 +108,8 @@ function initializeAugmentSlots() {
 		return out;
 	});
 }
+
+// ! Augment Slots > Name : Augments > Augment
 
 export function searchAugmentSlots(string) {
 	let searchQuery = formatForSearch(string);

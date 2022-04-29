@@ -10,11 +10,6 @@
 	$user.change.addGearPiece('weapon', 'weapon' + defaultName++);
 	function fillDummyData() {
 		$user.change.addGearPiece('weapon', 'weapon' + defaultName++);
-		// $user.change.addAugment(1, 20);
-		// $user.change.addAugment(1, 86);
-		// $user.change.addGearPiece('unit', 'name of unit');
-		// $user.change.addAugment(2, 96);
-		// $user.change.addAugment(2, 44);
 		console.log($user);
 		console.log(augments);
 	}
@@ -26,5 +21,13 @@
 
 <div class="flex gap-4 p-8">
 	<AugmentSelector />
-	<AllGear allGear={$user.gear} />
+	<div class="max-h-96">
+		<AllGear allGear={$user.gear} />
+	</div>
 </div>
+
+<style>
+	:global(body) {
+		@apply bg-green-200;
+	}
+</style>

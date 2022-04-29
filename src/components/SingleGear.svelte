@@ -1,6 +1,4 @@
 <script>
-	import { element } from 'svelte/internal';
-
 	import { user } from '../data/user';
 	import SingleAugment from './SingleAugment.svelte';
 	export let gear = {};

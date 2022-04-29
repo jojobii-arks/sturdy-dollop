@@ -6,11 +6,14 @@
 
 	export let augment;
 	export let hidden = false;
+
   function toggleDisplay() {
 		hidden = !hidden
   }
 
 	$: effects = augment.effects;
+
+
 
 </script>
 

@@ -1,5 +1,10 @@
 <script>
-	import { augmentSlots, searchAugmentSlots, expandAll } from '../data/augs';
+	import {
+		augmentSlots,
+		searchAugmentSlots,
+		expandAll,
+		augments,
+	} from '../data/augs';
 	import SingleAugment from './SingleAugment.svelte';
 	import { user } from '../data/user';
 
@@ -10,19 +15,46 @@
 	let gearTarget = 1;
 
 	function addSelectedToUser() {
+		if (!$user.gear) {
+			return;
+		}
 		$user.change.addAugment(gearTarget, selected.id);
 		selected = null;
+		searchValue = '';
 	}
 
 	$: searchAugmentSlots(searchValue);
-	$: gearTarget = $user.gear[0].id;
+	$: userHasGear = $user.gear.length > 0;
+
+	function handleEnter(e) {
+		if (e.key === 'Enter') {
+			if (e.ctrlKey && selected) {
+				addSelectedToUser();
+			}
+			let openAugments = $augmentSlots.filter((e) => !e.hidden && !e.collapsed);
+			console.log('open augments:', openAugments);
+			if (openAugments) {
+				selected = openAugments[0].augments.find((e) => !e.hidden);
+			}
+		}
+	}
+
+	function select(augment) {
+		selected = augment;
+	}
 </script>
 
 <div class="flex justify-center gap-6">
 	<div class="grid grid-rows-5">
 		<div class="row-span-1">
 			<label class="text-xl font-bold" for="search">Search Augments</label>
-			<input class="w-full" id="search" type="text" bind:value={searchValue} />
+			<input
+				class="w-full"
+				id="search"
+				type="text"
+				bind:value={searchValue}
+				on:keydown={handleEnter}
+			/>
 		</div>
 		<div class="row-span-3">
 			{#if selected}
@@ -31,8 +63,13 @@
 			{/if}
 		</div>
 		<div class="align-end row-span-1 flex flex-col justify-end">
-			{#if selected}
+			{#if selected && userHasGear}
 				<div class="align-end flex">
+					<select bind:value={gearTarget}>
+						{#each $user.gear as gear}
+							<option value={gear.id}>{gear.name}</option>
+						{/each}
+					</select>
 					<button
 						class="w-full bg-gray-900 text-white hover:bg-gray-400"
 						on:click={addSelectedToUser}>Add</button
@@ -67,8 +104,9 @@
 							<li
 								class="select-none bg-gray-100 even:bg-gray-200
 											hover:cursor-pointer hover:bg-gray-400
-											{augment.hidden ? 'hidden' : ''}"
-								on:click={() => (selected = augment)}
+											{augment.hidden ? 'hidden' : ''}
+											{augment.selected ? 'bg-blue-500' : ''}"
+								on:click={() => select(augment)}
 							>
 								{augment.name}
 							</li>
