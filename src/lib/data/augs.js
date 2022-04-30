@@ -31,8 +31,6 @@ export let augments = {
 	},
 };
 
-const iconPath = '$lib/assets/ngs-icons/effects/';
-
 let nextAugId = 1;
 raw.forEach((element) => {
 	let newAug = {};
@@ -60,7 +58,7 @@ raw.forEach((element) => {
 						name: prop.slice(7),
 						value: value,
 						valueFormatted: valueFormatted,
-						icon: iconPath + icon,
+						icon: icon,
 					});
 				}
 			}
