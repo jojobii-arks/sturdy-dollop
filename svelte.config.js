@@ -4,7 +4,7 @@ import adapterStatic from '@sveltejs/adapter-static';
 
 //? Change when building site.
 //!=================================
-const buildingForGitHubPages = false;
+const buildingForGitHubPages = true;
 
 const repositoryName = 'arks-sanctum';
 //!=================================
