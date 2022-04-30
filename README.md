@@ -1,12 +1,5 @@
+# ARKS Sanctum
+## PSO2:NGS Gear Planner, BP Calculator, Damage Calculator, and yeah
+### it's pretty cool ngl
 
-# SvelteKit + Tailwind CSS
-
-Just a template that I can work off of.
-
-[SvelteKit](https://svelte.dev/) + [TailwindCSS](https://tailwindcss.com/) *(includes [`forms`](https://github.com/tailwindlabs/tailwindcss-forms) and [`typography`](https://github.com/tailwindlabs/tailwindcss-typography))*
-
-## Guide
-
-1. Create repo with Template.
-2. Run `npm i` to install all dependencies.
-3. Run `npm run dev` to run dev server. 
+Still in-dev. Feel free to leave any ideas in the [Discussions Tab](https://github.com/joseph-bravo/arks-sanctum/discussions)
