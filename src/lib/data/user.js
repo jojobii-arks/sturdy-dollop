@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { augments } from '../data/augs';
+import { augments } from '$lib/data/augs';
 
 export const user = writable({
 	gear: [],
@@ -40,11 +40,6 @@ class GearPiece {
 		this.id = nextGearId++;
 		this.type = type;
 		this.name = name;
-		if (type === 'unit') {
-			this.icon = 'src/assets/ngs-icons/icon-unit.svg';
-		} else if (type === 'weapon') {
-			this.icon = 'src/assets/ngs-icons/icon-weapon.svg';
-		}
 		this.augments = [];
 	}
 }

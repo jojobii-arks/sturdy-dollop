@@ -1,12 +1,7 @@
 <script>
-	import {
-		augmentSlots,
-		searchAugmentSlots,
-		expandAll,
-		augments,
-	} from '../data/augs';
+	import { augmentSlots, searchAugmentSlots, expandAll } from '$lib/data/augs';
 	import SingleAugment from './SingleAugment.svelte';
-	import { user } from '../data/user';
+	import { user } from '$lib/data/user';
 
 	let searchValue = '';
 

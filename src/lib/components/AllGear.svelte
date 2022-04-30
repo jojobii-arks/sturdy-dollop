@@ -1,5 +1,5 @@
 <script>
-	import SingleGear from '../components/SingleGear.svelte'
+	import SingleGear from '$lib/components/SingleGear.svelte';
 	export let allGear;
 </script>
 

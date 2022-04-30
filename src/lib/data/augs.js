@@ -1,6 +1,6 @@
 import raw from './augs-20220428.json';
 import _ from 'lodash';
-import { convertRomanNumeral } from '../util';
+import { convertRomanNumeral } from './util';
 import { writable } from 'svelte/store';
 
 export let augments = {
@@ -31,7 +31,7 @@ export let augments = {
 	},
 };
 
-const iconPath = 'src/assets/ngs-icons/effects/';
+const iconPath = '$lib/assets/ngs-icons/effects/';
 
 let nextAugId = 1;
 raw.forEach((element) => {

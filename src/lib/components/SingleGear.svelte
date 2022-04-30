@@ -1,5 +1,7 @@
 <script>
-	import { user } from '../data/user';
+	import { user } from '$lib/data/user';
+	import iconUnit from '$lib/assets/ngs-icons/icon-unit.svg';
+	import iconWeapon from '$lib/assets/ngs-icons/icon-weapon.svg';
 	import SingleAugment from './SingleAugment.svelte';
 	export let gear = {};
 
@@ -12,6 +14,13 @@
 	function removeAugment(gear, augment) {
 		$user.change.removeAugment(gear.id, augment.id);
 	}
+
+	let gearIcon;
+	if (gear.type === 'unit') {
+		gearIcon = iconUnit;
+	} else if (gear.type === 'weapon') {
+		gearIcon = iconWeapon;
+	}
 </script>
 
 <li class="flex w-64 flex-col gap-2 text-white">
@@ -19,7 +28,7 @@
 		<div
 			class="flex w-full items-center justify-between gap-4 bg-red-900 p-2 text-right text-xl font-bold"
 		>
-			<img src={gear.icon} alt="" />
+			<img src={gearIcon} alt="" />
 			<h2 class="">{gear.name}</h2>
 		</div>
 		<button class="delete-button" on:click={removeGear}> X </button>

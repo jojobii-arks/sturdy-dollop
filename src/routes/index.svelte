@@ -1,10 +1,10 @@
 <script>
-	import Modal from '../components/Modal.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 
-	import AugmentSelector from '../components/AugmentSelector.svelte';
-	import AllGear from '../components/AllGear.svelte';
-	import Header from '../components/Header.svelte';
-	import { user } from '../data/user';
+	import AugmentSelector from '$lib/components/AugmentSelector.svelte';
+	import AllGear from '$lib/components/AllGear.svelte';
+	import Header from '$lib/components/Header.svelte';
+	import { user } from '$lib/data/user';
 	import { onMount } from 'svelte';
 
 	let isModalOpen = false;

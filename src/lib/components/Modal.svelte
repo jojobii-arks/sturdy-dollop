@@ -1,5 +1,5 @@
 <script>
-	import { user } from '../data/user';
+	import { user } from '$lib/data/user';
 	let type;
 	let name = '';
 
