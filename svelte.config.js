@@ -6,34 +6,33 @@ import adapterStatic from '@sveltejs/adapter-static';
 //!=================================
 const buildingForGitHubPages = false;
 
-const repositoryName = 'proper-arks-sanctum';
+const repositoryName = 'arks-sanctum';
 //!=================================
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
 	},
 
 	preprocess: [
 		preprocess({
-			postcss: true
-		})
-	]
+			postcss: true,
+		}),
+	],
 };
 
-
 if (buildingForGitHubPages) {
-  config.kit.adapter = adapterStatic({
-    pages: 'docs',
-    assets: 'docs',
-  });
-  config.kit.paths = {
-    base: '/' + repositoryName
-  };
-  config.kit.prerender = {
-    default: true
-  };
+	config.kit.adapter = adapterStatic({
+		pages: 'docs',
+		assets: 'docs',
+	});
+	config.kit.paths = {
+		base: '/' + repositoryName,
+	};
+	config.kit.prerender = {
+		default: true,
+	};
 }
 
 export default config;
