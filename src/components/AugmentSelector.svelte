@@ -25,6 +25,16 @@
 
 	$: searchAugmentSlots(searchValue);
 	$: userHasGear = $user.gear.length > 0;
+	$: setTargetToNewGear($user.gear);
+
+	function setTargetToNewGear(userGear) {
+		let ids = [];
+		userGear.forEach((e) => ids.push(e.id));
+		let highestId = Math.max(...ids);
+		console.log(highestId);
+		gearTarget = highestId;
+		console.log(gearTarget);
+	}
 
 	function handleEnter(e) {
 		if (e.key === 'Enter') {

@@ -103,8 +103,6 @@ function initializeAugmentSlots() {
 				selected: false,
 			});
 		}
-
-		console.log(out);
 		return out;
 	});
 }
@@ -128,7 +126,6 @@ export function searchAugmentSlots(string) {
 			});
 			slot.hidden = isEmpty;
 		});
-		console.log(augmentSlots);
 		return augmentSlots;
 	});
 }
@@ -138,7 +135,6 @@ export function expandAll(bool) {
 		augmentSlots.forEach((slot) => {
 			slot.collapsed = bool;
 		});
-		console.log(augmentSlots);
 		return augmentSlots;
 	});
 }

@@ -14,27 +14,31 @@
 	}
 </script>
 
-<li class="flex w-64 flex-col gap-8 text-white">
-	<div
-		class="flex items-center justify-between gap-4 bg-red-900 p-2 text-right text-xl font-bold"
-	>
-		<img src={gear.icon} alt="" />
-		<h2 class="">{gear.name}</h2>
+<li class="flex w-64 flex-col gap-2 text-white">
+	<div class="flex items-start">
+		<div
+			class="flex w-full items-center justify-between gap-4 bg-red-900 p-2 text-right text-xl font-bold"
+		>
+			<img src={gear.icon} alt="" />
+			<h2 class="">{gear.name}</h2>
+		</div>
+		<button class="delete-button" on:click={removeGear}> X </button>
 	</div>
 	<ul class="flex flex-col gap-2">
 		{#each gear.augments as augment}
-			<button
-				class="self-end rounded-full bg-white px-2 font-semibold text-red-500"
-				on:click={() => removeAugment(gear, augment)}>Remove</button
-			>
-			<SingleAugment {augment} />
+			<div class="flex items-start">
+				<SingleAugment {augment} />
+				<button
+					class="delete-button"
+					on:click={() => removeAugment(gear, augment)}>X</button
+				>
+			</div>
 		{/each}
 	</ul>
-
-	<button
-		class="rounded-full bg-white p-2 font-bold text-red-500"
-		on:click={removeGear}
-	>
-		Delete
-	</button>
 </li>
+
+<style>
+	.delete-button {
+		@apply h-6 w-6 rounded-full bg-white font-semibold text-red-500 hover:bg-red-300;
+	}
+</style>
