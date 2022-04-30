@@ -1,47 +1,36 @@
 <script>
-	import Modal from '$lib/components/Modal.svelte';
+	import Box from '../lib/components/basic/Box.svelte';
+	import Pill from '../lib/components/basic/Pill.svelte';
 
-	import AugmentSelector from '$lib/components/AugmentSelector.svelte';
-	import AllGear from '$lib/components/AllGear.svelte';
-	import Header from '$lib/components/Header.svelte';
-	import { user } from '$lib/data/user';
-	import { onMount } from 'svelte';
+	import Gear_Header from '../lib/components/Gear_Header.svelte';
 
-	let isModalOpen = false;
-
-	function openModal(bool) {
-		if (bool) {
-			isModalOpen = true;
-		} else {
-			isModalOpen = false;
-		}
-	}
-
-	function headerHandler(event) {
-		if (event.detail === 'add gear') {
-			openModal(true);
-		}
-	}
-
-	onMount(() => openModal(true));
+	export let gear = {
+		name: 'Gear Name',
+		fixa: {},
+		potential: {},
+		enhancementLevel: 50,
+		augments: [],
+		slots: 6,
+	};
 </script>
 
-<!-- <button on:click={fillDummyData}>Fill Dummy Data</button> -->
-{#if isModalOpen}
-	<Modal on:close={() => openModal(false)} />
-{/if}
-
-<Header on:nav={headerHandler} />
-
-<div class="flex gap-4 p-8">
-	<AugmentSelector />
-	<div class="max-h-96">
-		<AllGear allGear={$user.gear} />
+<div
+	class="min-w-screen flex min-h-screen items-center justify-center bg-slate-100"
+>
+	<div class="-box flex flex-col">
+		<Box>
+			<Gear_Header {...gear} />
+		</Box>
+		<Box>placeholder</Box>
+		<Box>placeholder</Box>
+		<Box>placeholder</Box>
+		<Box>placeholder</Box>
+		<Box>placeholder</Box>
 	</div>
 </div>
 
 <style>
-	:global(body) {
-		@apply bg-green-200;
+	.-box {
+		@apply rounded-xl border-2 border-black p-4;
 	}
 </style>

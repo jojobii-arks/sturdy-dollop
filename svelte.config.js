@@ -1,3 +1,4 @@
+import path from 'path';
 import preprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-auto';
 import adapterStatic from '@sveltejs/adapter-static';
