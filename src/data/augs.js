@@ -31,7 +31,7 @@ export let augments = {
 	},
 };
 
-const iconPath = 'src/assets/ngs-icons/effects/';
+const iconPath = '../assets/ngs-icons/effects/';
 
 let nextAugId = 1;
 raw.forEach((element) => {
