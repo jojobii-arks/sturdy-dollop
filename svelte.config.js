@@ -6,7 +6,7 @@ import adapterStatic from '@sveltejs/adapter-static';
 //!=================================
 const buildingForGitHubPages = true;
 
-const repositoryName = 'proper-arks-sanctum';
+const repositoryName = 'arks-sanctum';
 //!=================================
 
 /** @type {import('@sveltejs/kit').Config} */
