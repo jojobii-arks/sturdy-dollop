@@ -1,11 +1,15 @@
 <script>
+	import { base } from '$app/paths';
+	import { onMount } from 'svelte';
+
 	export let icon = 'armor';
 	export const iconMap = {
-		armor: 'icons/armor.svg',
+		armor: 'assets/icons/armor.svg',
+		weapon: 'assets/icons/weapon.svg',
 	};
-	let selectedIcon = iconMap['armor'];
+	let src = base + '/' + iconMap[icon];
 </script>
 
 <div>
-	<img src={selectedIcon} alt={icon} />
+	<img {src} alt={icon} />
 </div>

@@ -1,9 +1,11 @@
 <script>
+	import { base } from '$app/paths';
 	import AugmentInput, {
 		getAugmentArray,
 		augments,
 	} from '../lib/components/AugmentInput.svelte';
 	import Box from '../lib/components/common/Box.svelte';
+	import GearPiece from '../lib/components/GearPiece.svelte';
 
 	let user = {
 		gear: [],
@@ -33,7 +35,7 @@
 		}
 	}
 
-	let type = 'unit';
+	let type = 'armor';
 	let name;
 	let nameInput;
 	let form;
@@ -55,22 +57,21 @@
 		firstAugment = null;
 
 		nameInput.focus();
+		user = user;
 	}
 </script>
 
-<div class="flex h-screen items-center justify-center text-center">
+<div
+	class="flex h-screen flex-col items-center justify-center gap-4 text-center"
+>
 	<Box>
 		<h2 class="py-4 text-3xl font-bold">Create New Gear</h2>
-		<form
-			bind:this={form}
-			autocomplete="off"
-			class="flex flex-col gap-6 rounded-lg border p-6"
-		>
+		<form bind:this={form} class="flex flex-col gap-6 rounded-lg border p-6">
 			<div class="flex flex-col items-start">
 				<h3 class="py-2 text-lg font-semibold">Type</h3>
 				<label>
-					<input value="unit" type="radio" bind:group={type} />
-					Unit
+					<input value="armor" type="radio" bind:group={type} />
+					Armor
 				</label>
 
 				<label>
@@ -94,6 +95,13 @@
 			<button on:click|preventDefault={submitHandler}>Confirm</button>
 		</form>
 	</Box>
+	<div class="grid w-full grid-cols-1 gap-4 p-16 sm:grid-cols-2 lg:grid-cols-4">
+		{#each user.gear as gear}
+			<Box>
+				<GearPiece {...gear} />
+			</Box>
+		{/each}
+	</div>
 </div>
 
 <style>
