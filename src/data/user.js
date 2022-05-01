@@ -41,9 +41,9 @@ class GearPiece {
 		this.type = type;
 		this.name = name;
 		if (type === 'unit') {
-			this.icon = 'src/assets/ngs-icons/icon-unit.svg';
+			this.icon = 'ngs-icons/icon-unit.svg';
 		} else if (type === 'weapon') {
-			this.icon = 'src/assets/ngs-icons/icon-weapon.svg';
+			this.icon = 'ngs-icons/icon-weapon.svg';
 		}
 		this.augments = [];
 	}

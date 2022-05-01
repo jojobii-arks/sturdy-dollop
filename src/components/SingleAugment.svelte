@@ -1,8 +1,8 @@
 <script>
 	import SingleEffect from './SingleEffect.svelte';
 
-	import DownChevron from '../assets/icons/DownChevron.svelte';
-	import UpChevron from '../assets/icons/UpChevron.svelte';
+	import DownChevron from './icons/DownChevron.svelte';
+	import UpChevron from './icons/UpChevron.svelte';
 
 	export let augment;
 	export let hidden = false;
