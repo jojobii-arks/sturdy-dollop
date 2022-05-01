@@ -31,7 +31,7 @@ export let augments = {
 	},
 };
 
-const iconPath = 'ngs-icons/effects/';
+const iconPath = 'arks-sanctum/ngs-icons/effects/';
 
 let nextAugId = 1;
 raw.forEach((element) => {

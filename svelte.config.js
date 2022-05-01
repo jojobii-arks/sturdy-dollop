@@ -7,6 +7,7 @@ import adapterStatic from '@sveltejs/adapter-static';
 const buildingForGitHubPages = true;
 
 const repositoryName = 'arks-sanctum';
+const dev = process.env.NODE_ENV === 'development';
 //!=================================
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -28,8 +29,9 @@ if (buildingForGitHubPages) {
 		assets: 'docs',
 	});
 	config.kit.paths = {
-		base: '/' + repositoryName,
+		base: dev ? '' : '/' + repositoryName,
 	};
+	// config.kit.appDir = 'internal';
 	config.kit.prerender = {
 		default: true,
 	};
