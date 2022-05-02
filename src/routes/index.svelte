@@ -52,7 +52,8 @@
 		console.log('user:', user);
 		augments.clear();
 
-		//! reset
+		// Reset...
+
 		name = null;
 		firstAugment = null;
 
@@ -62,7 +63,7 @@
 </script>
 
 <div
-	class="flex h-screen flex-col items-center justify-center gap-4 text-center"
+	class="flex min-h-screen flex-col items-center justify-center gap-4 text-center"
 >
 	<Box>
 		<h2 class="py-4 text-3xl font-bold">Create New Gear</h2>

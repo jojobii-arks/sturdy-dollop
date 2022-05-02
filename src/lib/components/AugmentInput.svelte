@@ -16,7 +16,8 @@
 </script>
 
 <script>
-	import { onDestroy, onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
 	export let augmentName = '';
 	export let id = nextId++;
@@ -29,11 +30,28 @@
 		augments.set(id, augmentName);
 		return augments.delete(id);
 	});
+
+	let selectedEffect;
+
+	const effects = ['pot-mel', 'pot-rng', 'pot-tec'];
 </script>
 
-<label class="flex flex-col items-start">
-	<input type="text" bind:value={augmentName} placeholder="Augment Name..." />
-</label>
+<div in:fly={{ x: 100 }} out:fly={{ x: 100 }}>
+	<label>
+		<input type="text" bind:value={augmentName} placeholder="augment name..." />
+	</label>
+	<div class="">
+		'
+		<!-- TODO: Create effects input -->
+		<h4>Effects</h4>
+		<select bind:value={selectedEffect}>
+			{#each effects as effect}
+				<option value={effect}>{effect}</option>
+			{/each}
+		</select>
+		<input type="number" />
+	</div>
+</div>
 {#if augmentName && augmentName.length > 0}
 	<svelte:self />
 {/if}
