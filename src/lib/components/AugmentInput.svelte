@@ -16,6 +16,7 @@
 </script>
 
 <script>
+	import EffectInput from './EffectInput.svelte';
 	import { fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
@@ -30,27 +31,20 @@
 		augments.set(id, augmentName);
 		return augments.delete(id);
 	});
-
-	let selectedEffect;
-
-	const effects = ['pot-mel', 'pot-rng', 'pot-tec'];
 </script>
 
-<div in:fly={{ x: 100 }} out:fly={{ x: 100 }}>
-	<label>
-		<input type="text" bind:value={augmentName} placeholder="augment name..." />
+<div
+	class="flex flex-col gap-2 rounded-xl border-2 p-2"
+	in:fly={{ x: 100 }}
+	out:fly={{ x: 100 }}
+>
+	<label class="flex items-center justify-between gap-2 font-bold">
+		Name:
+		<input class="w-full" type="text" bind:value={augmentName} placeholder="" />
 	</label>
-	<div class="">
-		'
-		<!-- TODO: Create effects input -->
-		<h4>Effects</h4>
-		<select bind:value={selectedEffect}>
-			{#each effects as effect}
-				<option value={effect}>{effect}</option>
-			{/each}
-		</select>
-		<input type="number" />
-	</div>
+	{#if augmentName && augmentName.length > 0}
+		<EffectInput />
+	{/if}
 </div>
 {#if augmentName && augmentName.length > 0}
 	<svelte:self />
@@ -60,7 +54,8 @@
 	button {
 		@apply rounded-full bg-gray-800 px-6 py-1 uppercase text-white transition duration-300 ease-in-out hover:bg-black;
 	}
-	input {
+	input,
+	select {
 		@apply rounded-full;
 	}
 </style>
